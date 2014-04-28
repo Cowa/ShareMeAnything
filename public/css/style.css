@@ -1,12 +1,33 @@
 body {
-	font-family: "Source Sans Pro", "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-  background: #d3d3d3;
-}
-.ui.sidebar {
-  background: #5EAA63;
+  margin: 0;
+  background: #83a685;
+  font-family: "Source Sans Pro", "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 }
 section {
-  
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  text-align: center;
+}
+.ui.sidebar {
+  background: #51708f;
+  border-right: 2px solid;
+}
+.ui.sidebar .content {
+  color: white;
+  margin-left: 15px;  
+}
+.mini-bar {
+  height: 100%;
+  position: absolute;
+  background: #51708f;
+  border-right: 2px solid;
+}
+.toggle-sb {
+  border-radius: 0;
+}
+#menu {
+  width: 100%;
 }
 /********
  * FONT *
