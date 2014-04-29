@@ -8,26 +8,44 @@ section {
   height: 100%;
   position: absolute;
   text-align: center;
+  text-shadow: 0 1px 3px rgba(0,0,0,.5);
+  box-shadow: inset 0 0 100px rgba(0,0,0,.6);
 }
 .ui.sidebar {
   background: #51708f;
   border-right: 2px solid;
+  box-shadow: inset 0 0 15px rgba(0,0,0,.6);
 }
 .ui.sidebar .content {
   color: white;
-  margin-left: 15px;  
+  margin-left: 15px;
 }
 .mini-bar {
   height: 100%;
   position: absolute;
   background: #51708f;
   border-right: 2px solid;
+  box-shadow: inset 0 0 15px rgba(0,0,0,.6);
+}
+.ui.sidebar p {
+  margin: 5px;
+  font-size: 25px;
+}
+.ui.sidebar p i {
+  position: absolute;
+  left: 240px;
+}
+.ui.sidebar h2 {
+  text-shadow: 0 1px 3px rgba(0,0,0,.5);
 }
 .toggle-sb {
   border-radius: 0;
 }
 #menu {
   width: 100%;
+}
+h2 * {
+  display: inline-block;
 }
 /********
  * FONT *
