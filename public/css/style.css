@@ -1,7 +1,11 @@
 body {
   margin: 0;
-  background: #83a685;
   font-family: "Source Sans Pro", "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  background: url(../img/bg/bg-1.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 section {
   width: 100%;
@@ -9,12 +13,22 @@ section {
   position: absolute;
   text-align: center;
   text-shadow: 0 1px 3px rgba(0,0,0,.5);
-  box-shadow: inset 0 0 100px rgba(0,0,0,.6);
+}
+section h1 {
+}
+h2 * {
+  display: inline-block;
+}
+a {
+  color: #544d87;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
 }
 .ui.sidebar {
-  background: #51708f;
+  background: #544d87;
   border-right: 2px solid;
-  box-shadow: inset 0 0 15px rgba(0,0,0,.6);
 }
 .ui.sidebar .content {
   color: white;
@@ -23,9 +37,8 @@ section {
 .mini-bar {
   height: 100%;
   position: absolute;
-  background: #51708f;
+  background: #544d87;
   border-right: 2px solid;
-  box-shadow: inset 0 0 15px rgba(0,0,0,.6);
 }
 .ui.sidebar p {
   margin: 5px;
@@ -38,14 +51,29 @@ section {
 .ui.sidebar h2 {
   text-shadow: 0 1px 3px rgba(0,0,0,.5);
 }
-.toggle-sb {
-  border-radius: 0;
-}
 #menu {
   width: 100%;
+  border-radius: 0;
 }
-h2 * {
-  display: inline-block;
+#inmenu {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+#menu, #inmenu {
+  background: #5EAA63
+}
+#share {
+  margin-top: 30%;
+}
+footer {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+footer p {
+  margin: 0px;
+  text-align: center;
 }
 /********
  * FONT *
