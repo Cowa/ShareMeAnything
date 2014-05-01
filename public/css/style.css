@@ -8,13 +8,11 @@ body {
   background-size: cover;
 }
 section {
-  width: 100%;
-  height: 100%;
-  position: absolute;
   text-align: center;
   text-shadow: 0 1px 3px rgba(0,0,0,.5);
-}
-section h1 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 h2 * {
   display: inline-block;
@@ -23,8 +21,21 @@ a {
   color: #544d87;
   text-decoration: none;
 }
+.ui.sidebar p a {
+  color: #fff;
+}
+a, i {
+  display: inline;
+}
 a:hover {
   text-decoration: underline;
+}
+.mini-bar {
+  z-index: 1;
+  height: 100%;
+  position: absolute;
+  background: #544d87;
+  border-right: 2px solid;
 }
 .ui.sidebar {
   background: #544d87;
@@ -33,12 +44,6 @@ a:hover {
 .ui.sidebar .content {
   color: white;
   margin-left: 15px;
-}
-.mini-bar {
-  height: 100%;
-  position: absolute;
-  background: #544d87;
-  border-right: 2px solid;
 }
 .ui.sidebar p {
   margin: 5px;
@@ -50,6 +55,12 @@ a:hover {
 }
 .ui.sidebar h2 {
   text-shadow: 0 1px 3px rgba(0,0,0,.5);
+}
+.ui.sidebar h2 a {
+  color: #fff;
+}
+.ui.sidebar h2 a:hover, .ui.sidebar p a:hover {
+  text-decoration: none;
 }
 #menu {
   width: 100%;
@@ -64,7 +75,15 @@ a:hover {
   background: #5EAA63
 }
 #share {
-  margin-top: 30%;
+  -moz-box-shadow: -2px 2px 10px 0px rgba(0,0,0,.5);
+  -webkit-box-shadow: -2px 2px 10px 0px rgba(0,0,0,.5);
+  -o-box-shadow: -2px 2px 10px 0px rgba(0,0,0,.5);
+  box-shadow: -2px 2px 10px 0px rgba(0,0,0,.5);
+  left: 50%;
+  top: 50%;
+  position: fixed;
+  margin-left: -122px;
+  margin-top: -31px;
 }
 footer {
   width: 100%;
@@ -75,9 +94,6 @@ footer p {
   margin: 0px;
   text-align: center;
 }
-/********
- * FONT *
- ********/
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
