@@ -33,7 +33,7 @@ a:hover {
 .mini-bar {
   z-index: 1;
   height: 100%;
-  position: absolute;
+  position: fixed;
   background: #544d87;
   border-right: 2px solid;
 }
@@ -87,7 +87,7 @@ a:hover {
 }
 footer {
   width: 100%;
-  position: absolute;
+  position: fixed;
   bottom: 0;
 }
 footer p {
