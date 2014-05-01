@@ -11,6 +11,9 @@ Progress
 Currently in conception of the UI design.
 
 Very early footage
+------------------
+
+You can have a demo [here](http://verticale.me/sma/).
 
 ![early1](readme/early1.png)
 
