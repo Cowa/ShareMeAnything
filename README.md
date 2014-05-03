@@ -18,3 +18,5 @@ You can have a demo [here](http://verticale.me/sma/).
 ![early1](readme/early1.png)
 
 ![early2](readme/early2.png)
+
+![early3](readme/early3.png)

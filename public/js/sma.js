@@ -1,3 +1,7 @@
+/**************************************
+ * TODO : it can be easily refactored *
+ **************************************/
+
 function hideAll() {
 	$('#front').hide();
 	$('#favorite').hide();
@@ -12,27 +16,27 @@ $('.toggle-sb').click(function() {
 	}).sidebar('toggle');
 });
 
-$('#history-menu').click(function() {
+$('#history-menu a').click(function() {
 	hideAll();
 	$('#history').show();
 });
 
-$('#favorite-menu').click(function() {
+$('#favorite-menu a').click(function() {
 	hideAll();
 	$('#favorite').show();
 });
 
-$('#settings-menu').click(function() {
+$('#settings-menu a').click(function() {
 	hideAll();
 	$('#settings').show();
 });
 
-$('#about-menu').click(function() {
+$('#about-menu a').click(function() {
 	hideAll();
 	$('#about').show();
 });
 
-$('#front-menu').click(function() {
+$('#front-menu a').click(function() {
 	hideAll();
 	$('#front').show();
 });
