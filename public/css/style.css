@@ -1,7 +1,7 @@
 body {
   margin: 0;
   font-family: "Source Sans Pro", "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-  background: url(../img/bg/bg-1.jpg) no-repeat center center fixed; 
+  background: url(../img/bg/bg-1.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -58,10 +58,10 @@ a:hover {
 .ui.sidebar h2 a {
   color: #fff;
 }
-.history-content a {
+.history-content a, .favorite-content a {
   color: #000;
 }
-.ui.sidebar h2 a:hover, .ui.sidebar p a:hover, .history-content a:hover {
+.ui.sidebar h2 a:hover, .ui.sidebar p a:hover, .history-content a:hover, .favorite-content a:hover {
   text-decoration: none;
 }
 .small-info {
@@ -90,7 +90,7 @@ a:hover {
   margin-left: -122px;
   margin-top: -31px;
 }
-.history-content {
+.history-content, .favorite-content {
   left: 50%;
   position: absolute;
   margin-left: -180px;
