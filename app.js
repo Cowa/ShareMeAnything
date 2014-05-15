@@ -85,7 +85,7 @@ io.sockets.on('connection', function(socket) {
 				send_video(socket, url, 'vimeo');
 
 			} else {
-				socket.emit('share_invalid');
+				socket.emit('People, sorry but your share seems invalid');
 			}
 		}
 	});
@@ -148,8 +148,8 @@ function joinRoom(socket) {
 
   var i     = 0,
       found = false,
-      room  = 'moor';
-      role  = 'zombi';
+      room  = '';
+      role  = '';
 
 	// Join an existing room (with a people already)
 	for (var key in io.sockets.manager.rooms) {
@@ -159,8 +159,8 @@ function joinRoom(socket) {
 				room = key.substring(1);
 
 				io.sockets.clients(room)[0].get('role', function(err, grole) {
-					if(grole == 'receiver') role = 'sender';
-					else role = 'receiver';
+					if (grole == 'receiver') role = 'sender';
+          else                     role = 'receiver';
 				});
 			}
 		}
@@ -198,22 +198,26 @@ function numberOfPeopleInRooms() {
 	return n;
 }
 
-// Send the state of a room to people from it (-1: error, 0: alone, 1: ok)
-// And tell them which role they got ('sender' or 'receiver')
+// Send the state of a room to people in it (-1: error, 0: alone, 1: ok)
 function updateRoomState(room) {
 
-	var msg = -1;
+	var state = -1;
 
-	if      (io.sockets.clients(room).length <= 1) msg = 0;
-	else if (io.sockets.clients(room).length == 2) msg = 1;
+	if      (io.sockets.clients(room).length <= 1) state = 0;
+	else if (io.sockets.clients(room).length == 2) state = 1;
 
-	for(var cl in io.sockets.clients(room)) {
-		io.sockets.clients(room)[cl].get('role', function(err, role) {
-			io.sockets.clients(room)[cl].emit('role', role);
-		});
-	}
+  tellTheirRole(room);
+  io.sockets.in(room).emit('People, here\'s the state of your room', state);
+}
 
-	io.sockets.in(room).emit('room_state', msg)
+// Send their role to people inside a room
+function tellTheirRole(room) {
+
+  for(var cl in io.sockets.clients(room)) {
+    io.sockets.clients(room)[cl].get('role', function(err, role) {
+      io.sockets.clients(room)[cl].emit('People, this is you role', role);
+    });
+  }
 }
 
 // Check if a people was in a room (and not in lobby)
@@ -247,8 +251,8 @@ function switchRole(room) {
 
 	for(var cl in io.sockets.clients(room)) {
 		io.sockets.clients(room)[cl].get('role', function(err, role) {
-			if(role == 'sender') io.sockets.clients(room)[cl].set('role', 'receiver');
-			else io.sockets.clients(room)[cl].set('role', 'sender');
+			if (role == 'sender') io.sockets.clients(room)[cl].set('role', 'receiver');
+			else                  io.sockets.clients(room)[cl].set('role', 'sender');
 		});
 	}
 
