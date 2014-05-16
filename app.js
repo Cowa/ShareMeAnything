@@ -21,7 +21,6 @@ app.use('/css', express.static(__dirname + '/public/back/css'))
 .get('/', function(req, res) {
 	res.sendfile(__dirname + '/public/back/index.html');
 })
-
 .get('/share', function(req, res) {
 	res.sendfile(__dirname + '/public/back/share.html');
 })
@@ -146,10 +145,10 @@ function isSender(socket) {
 // Join a room which has less than 2 people & set role
 function joinRoom(socket) {
 
-  var i     = 0,
-      found = false,
-      room  = '';
-      role  = '';
+	var i     = 0,
+		found = false,
+		room  = '';
+		role  = '';
 
 	// Join an existing room (with a people already)
 	for (var key in io.sockets.manager.rooms) {
@@ -160,7 +159,7 @@ function joinRoom(socket) {
 
 				io.sockets.clients(room)[0].get('role', function(err, grole) {
 					if (grole == 'receiver') role = 'sender';
-          else                     role = 'receiver';
+					else                     role = 'receiver';
 				});
 			}
 		}
@@ -206,18 +205,18 @@ function updateRoomState(room) {
 	if      (io.sockets.clients(room).length <= 1) state = 0;
 	else if (io.sockets.clients(room).length == 2) state = 1;
 
-  tellTheirRole(room);
-  io.sockets.in(room).emit('People, here\'s the state of your room', state);
+	tellTheirRole(room);
+	io.sockets.in(room).emit('People, here\'s the state of your room', state);
 }
 
 // Send their role to people inside a room
 function tellTheirRole(room) {
 
-  for(var cl in io.sockets.clients(room)) {
-    io.sockets.clients(room)[cl].get('role', function(err, role) {
-      io.sockets.clients(room)[cl].emit('People, this is you role', role);
-    });
-  }
+	for(var cl in io.sockets.clients(room)) {
+		io.sockets.clients(room)[cl].get('role', function(err, role) {
+			io.sockets.clients(room)[cl].emit('People, this is you role', role);
+		});
+	}
 }
 
 // Check if a people was in a room (and not in lobby)

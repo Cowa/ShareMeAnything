@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>ShareMeAnything</title>
+  <link rel="stylesheet" href="css/camera.css">
 </head>
 <body>
   <h1>ShareMeAnything - Back UI</h1>
@@ -10,10 +11,19 @@
   <h2 id="stateOfRoom">Unknown</h2>
   <p id="myRole">Unknown</p>
 
+  <div id="camera">
+    <video autoplay></video>
+    <img id="takenPhoto">
+    <canvas style="display:none;"></canvas>
+    <br/>
+    <button id="takePhoto">Take a photo</button><button id="sharePhoto">Share the photo</button>
+  </div>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script src="js/connect.js"></script>
   <script src="js/common.js"></script>
   <script src="js/room.js"></script>
+  <script src="js/camera.js"></script>
 </body>
 </html>
