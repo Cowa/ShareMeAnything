@@ -70,7 +70,7 @@ io.sockets.on('connection', function(socket) {
 	});
 
 	// People sender send something from URL
-	socket.on('share_any', function(url) {
+	socket.on('Server, I shared something from an URL', function(url) {
 
 		if(isSender(socket)) {
 

@@ -1,7 +1,6 @@
 navigator.getUserMedia  = navigator.getUserMedia    || navigator.webkitGetUserMedia ||
                           navigator.mozGetUserMedia || navigator.msGetUserMedia;
 
-
 var media       = null,
     video       = document.querySelector('video'),
     canvas      = document.querySelector('canvas'),
@@ -25,17 +24,22 @@ function takePhoto() {
     }
   }
 
-buttonPhoto.click(takePhoto);
-
 var errorCallback = function() {
 	console.log('Refused to access camera.');
 };
 
-if (navigator.getUserMedia) {
-	navigator.getUserMedia(camConfig, function(stream) {
-		video.src = window.URL.createObjectURL(stream);
-		media = stream;
-	}, errorCallback);
-} else {
-	video.src = 'sad';
+function initCamera() {
+
+	if (navigator.getUserMedia) {
+		navigator.getUserMedia(camConfig, function(stream) {
+			video.src = window.URL.createObjectURL(stream);
+			media = stream;
+		}, errorCallback);
+	} else {
+		video.src = 'none';
+	}
 }
+
+// Event listeners
+buttonPhoto.click(takePhoto);
+buttonShare.click();
