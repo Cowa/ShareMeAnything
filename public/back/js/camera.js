@@ -2,11 +2,11 @@ navigator.getUserMedia  = navigator.getUserMedia    || navigator.webkitGetUserMe
                           navigator.mozGetUserMedia || navigator.msGetUserMedia;
 
 var media       = null,
-    video       = document.querySelector('video'),
-    canvas      = document.querySelector('canvas'),
-    context     = canvas.getContext('2d'),
-    buttonPhoto = $('#takePhoto'),
-    buttonShare = $('#sharePhoto');
+	video       = document.querySelector('video'),
+	canvas      = document.querySelector('canvas'),
+	context     = canvas.getContext('2d'),
+	buttonPhoto = $('#takePhoto'),
+	buttonShare = $('#sharePhoto');
 
 var camConfig = {
 	video: {
@@ -18,11 +18,22 @@ var camConfig = {
 };
 
 function takePhoto() {
-    if (media) {
-      context.drawImage(video, 0, 0);
-      document.querySelector('img').src = canvas.toDataURL('image/webp');
-    }
-  }
+	if (media) {
+		context.drawImage(video, 0, 0);
+		document.querySelector('img').src = canvas.toDataURL('image/webp');
+	}
+}
+
+function sharePhoto() {
+
+	var photo = $('#takenPhoto').attr('src');
+
+	if (photo != null) {
+		socket.emit('Server, here\'s a photo from my camera', photo);
+	} else {
+		console.log('No photo taken.');
+	}
+}
 
 var errorCallback = function() {
 	console.log('Refused to access camera.');
@@ -42,4 +53,4 @@ function initCamera() {
 
 // Event listeners
 buttonPhoto.click(takePhoto);
-buttonShare.click();
+buttonShare.click(sharePhoto);

@@ -1,33 +1,64 @@
 var myRole    = 'unknown',
     roomState = 'unknown';
 
+/**********************
+ ** SOCKET LISTENERS **
+ **********************/
 socket.emit('Server, please I want to share');
 
 socket.on('People, here\'s the state of your room', function(state) {
 
-  if (state == 0) {
-    $('#stateOfRoom').text('You are alone...');
-  } else if (state == 1) {
-    $('#stateOfRoom').text('You are in communication !');
-  }
-
+  viewState(state);
   roomState = state;
 
   thankYouServer();
 });
 
-socket.on('People, this is you role', function(role) {
+socket.on('People, this is your role', function(role) {
 
-  if (role == 'sender') {
-    $('#myRole').text('You are the sender');
-  } else { // receiver
-    $('#myRole').text('You are the receiver');
-  }
-
+  viewRole(role);
   myRole = role;
 
   thankYouServer();
 });
+
+socket.on('People, this camera photo was sent for you', function(photo) {
+
+  viewSharedImage(photo);
+  thankYouServer();
+});
+
+/***************
+ ** FUNCTIONS **
+ ***************/
+function viewState(state) {
+
+  if (state == 0) {
+    $('#stateOfRoom').text('You are alone...');
+    $('#waiting').show();
+    $('#inTouch').hide();
+
+  } else if (state == 1) {
+    $('#stateOfRoom').text('You are in communication !');
+    $('#waiting').hide();
+    $('#inTouch').show();
+  }
+}
+
+function viewRole(role) {
+
+  if (role == 'sender') {
+    $('#choiceOfShare').show();
+    $('#myRole').text('You are the sender');
+  } else {
+    $('#choiceOfShare').hide();
+    $('#myRole').text('You are the receiver');
+  }
+}
+
+function viewSharedImage(image) {
+  $('#lastShare').append('<img src="' + image + '"/>');
+}
 
 function isSender() {
   return myRole == 'sender';
@@ -36,9 +67,28 @@ function isSender() {
 function shareByCamera() {
 
   if (isSender()) {
+    $('#cameraShareBox').show();
     initCamera();
   }
 }
 
-// Event listeners
+function shareByImage() {
+
+  if (isSender()) {
+    $('#imageShareBox').show();
+  }
+}
+
+function shareByURL() {
+
+  if (isSender()) {
+    $('#urlShareBox').show();
+  }
+}
+
+/*********************
+ ** EVENT LISTENERS **
+ *********************/
 $('#shareByCamera').click(shareByCamera);
+$('#shareByImage').click(shareByImage);
+$('#shareByURL').click(shareByURL);

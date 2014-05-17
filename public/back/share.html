@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>ShareMeAnything</title>
-  <link rel="stylesheet" href="css/camera.css">
+  <link rel="stylesheet" href="css/common.css">
 </head>
 <body>
   <h1>ShareMeAnything - Back UI</h1>
@@ -11,19 +11,37 @@
   <h2 id="stateOfRoom">Unknown</h2>
   <p id="myRole">Unknown</p>
 
-  <div id="choiceOfShare">
-    <p>Share anything by...</p>
-    <button id="shareByCamera">Camera</button>
-    <button id="shareByImage">Image</button>
-    <button id="shareByURL">URL</button>
+  <div id="waiting">
+    <p>Please wait, someone will (hopefully) join you soon...</p>
   </div>
 
-  <div id="camera">
-    <video autoplay></video>
-    <img id="takenPhoto">
-    <canvas style="display:none;"></canvas>
-    <br/>
-    <button id="takePhoto">Take a photo</button><button id="sharePhoto">Share the photo</button>
+  <div id="inTouch">
+
+    <div id="lastShare"></div>
+
+    <div id="choiceOfShare">
+      <p>Share anything by...</p>
+      <button id="shareByCamera">Camera</button>
+      <button id="shareByImage">Image</button>
+      <button id="shareByURL">URL</button>
+    </div>
+
+    <div id="cameraShareBox">
+      <video id="camera" autoplay></video>
+      <img id="takenPhoto">
+      <canvas style="display:none;"></canvas>
+      <br/>
+      <button id="takePhoto">Take a photo</button><button id="sharePhoto">Share the photo</button>
+    </div>
+
+    <div id="imageShareBox">
+      <button id="takePhoto">Upload image</button><button id="sharePhoto">Share the image</button>
+    </div>
+
+    <div id="urlShareBox">
+      <input type="text" placeholder="URL to share"><button id="sharePhoto">Share the URL</button>
+    </div>
+
   </div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>

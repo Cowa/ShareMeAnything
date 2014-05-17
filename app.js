@@ -89,6 +89,11 @@ io.sockets.on('connection', function(socket) {
 		}
 	});
 
+	socket.on('Server, here\'s a photo from my camera', function(photo) {
+		var room = getRoom(socket);
+		socket.broadcast.to(room).emit('People, this camera photo was sent for you', photo);
+	});
+
 	// People receiver say 'Fun' to the share (switch role)
 	socket.on('fun', function() {
 
@@ -214,7 +219,7 @@ function tellTheirRole(room) {
 
 	for(var cl in io.sockets.clients(room)) {
 		io.sockets.clients(room)[cl].get('role', function(err, role) {
-			io.sockets.clients(room)[cl].emit('People, this is you role', role);
+			io.sockets.clients(room)[cl].emit('People, this is your role', role);
 		});
 	}
 }
