@@ -94,6 +94,11 @@ io.sockets.on('connection', function(socket) {
 		socket.broadcast.to(room).emit('People, this camera photo was sent for you', photo);
 	});
 
+  socket.on('Server, here\'s an image I uploaded', function(image) {
+    var room = getRoom(socket);
+    socket.broadcast.to(room).emit('People, this image was sent for you', image);
+  });
+
 	// People receiver say 'Fun' to the share (switch role)
 	socket.on('fun', function() {
 

@@ -1,3 +1,8 @@
-#cameraShareBox, #imageShareBox, #urlShareBox, #waiting, #inTouch {
+#cameraShareBox,
+#imageShareBox,
+#urlShareBox,
+#waiting,
+#inTouch,
+#imageToShare {
 	display: none;
 }

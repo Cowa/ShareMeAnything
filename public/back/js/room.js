@@ -28,6 +28,12 @@ socket.on('People, this camera photo was sent for you', function(photo) {
   thankYouServer();
 });
 
+socket.on('People, this image was sent for you', function(image) {
+
+  viewSharedImage(image);
+  thankYouServer();
+});
+
 /***************
  ** FUNCTIONS **
  ***************/
