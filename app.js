@@ -90,31 +90,32 @@ io.sockets.on('connection', function(socket) {
 	});
 
 	socket.on('Server, here\'s a photo from my camera', function(photo) {
+
 		var room = getRoom(socket);
-		socket.broadcast.to(room).emit('People, this camera photo was sent for you', photo);
+		socket.broadcast.to(room).emit('People, this photo was sent for you', photo);
+		shareDone(socket, photo);
 	});
 
   socket.on('Server, here\'s an image I uploaded', function(image) {
+
     var room = getRoom(socket);
     socket.broadcast.to(room).emit('People, this image was sent for you', image);
+    shareDone(socket, image);
   });
 
 	// People receiver say 'Fun' to the share (switch role)
-	socket.on('fun', function() {
+	socket.on('Server, the share was fun !', function() {
 
 		var room = getRoom(socket);
-		io.sockets.in(room).emit('clear_room');
 
 		switchRole(getRoom(socket));
 	});
 
 	// People receiver say 'Bad' to the share (end communication)
-	socket.on('bad', function() {
+	socket.on('Server, the share was bad...', function() {
 
 		var room = getRoom(socket);
 		var roomate = getRoomate(socket, room);
-
-		io.sockets.in(room).emit('clear_room');
 
 		socket.leave(room);
 		roomate.leave(room);
@@ -308,4 +309,8 @@ function send_image(socket, image) {
 	var room  = getRoom(socket);
 	socket.broadcast.to(room).emit('receive_image', image);
 	socket.emit('share_done', image, 'img');
+}
+
+function shareDone(socket, share) {
+	socket.emit('People, your share was sent', share);	
 }

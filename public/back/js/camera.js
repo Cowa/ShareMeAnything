@@ -20,7 +20,7 @@ var camConfig = {
 function takePhoto() {
 	if (media) {
 		context.drawImage(video, 0, 0);
-		document.querySelector('img').src = canvas.toDataURL('image/webp');
+		$('#takenPhoto').attr('src', canvas.toDataURL('image/webp'));
 	}
 }
 
