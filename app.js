@@ -96,12 +96,12 @@ io.sockets.on('connection', function(socket) {
 		shareDone(socket, photo);
 	});
 
-  socket.on('Server, here\'s an image I uploaded', function(image) {
+	socket.on('Server, here\'s an image I uploaded', function(image) {
 
-    var room = getRoom(socket);
-    socket.broadcast.to(room).emit('People, this image was sent for you', image);
-    shareDone(socket, image);
-  });
+		var room = getRoom(socket);
+		socket.broadcast.to(room).emit('People, this image was sent for you', image);
+		shareDone(socket, image);
+	});
 
 	// People receiver say 'Fun' to the share (switch role)
 	socket.on('Server, the share was fun !', function() {
@@ -109,12 +109,13 @@ io.sockets.on('connection', function(socket) {
 		var room = getRoom(socket);
 
 		switchRole(getRoom(socket));
+		socket.broadcast.to(room).emit('People, your share was fun !');
 	});
 
 	// People receiver say 'Bad' to the share (end communication)
 	socket.on('Server, the share was bad...', function() {
 
-		var room = getRoom(socket);
+		var room    = getRoom(socket);
 		var roomate = getRoomate(socket, room);
 
 		socket.leave(room);
@@ -122,8 +123,8 @@ io.sockets.on('connection', function(socket) {
 		updateNumberOfPeopleInRooms();
 
 		// end of stream, 1 for the people who clicked 'bad', 0 for the other
-		socket.emit('eos', '1');
-		roomate.emit('eos', '0');
+		socket.emit('People, sorry but this is the end...', 'You didn\'t like the share');
+		roomate.emit('People, sorry but this is the end...', 'Your share was bad');
 	});
 });
 
@@ -157,9 +158,9 @@ function isSender(socket) {
 function joinRoom(socket) {
 
 	var i     = 0,
-		found = false,
-		room  = '';
-		role  = '';
+	    found = false,
+	    room  = '';
+	    role  = '';
 
 	// Join an existing room (with a people already)
 	for (var key in io.sockets.manager.rooms) {

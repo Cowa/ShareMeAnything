@@ -17,7 +17,13 @@
 
   <div id="inTouch">
 
-    <div id="lastShare"></div>
+    <div id="lastShare">
+      <!-- Contains the very last share -->
+    </div>
+
+    <div id="currentHistory">
+      <!-- Contains every shares of the current communication -->
+    </div>
 
     <div id="choiceOfShare">
       <p>Share anything by...</p>
@@ -41,10 +47,12 @@
     </div>
 
     <div id="drawShareBox">
+      <p>Not implemented yet</p>
       <button id="shareDraw">Share the draw</button>
     </div>
 
     <div id="urlShareBox">
+      <p>Not implemented yet</p>
       <input type="text" placeholder="URL to share"><button id="sharePhoto">Share the URL</button>
     </div>
 
@@ -53,6 +61,11 @@
       <button id="voteFun">Fun</button><button id="voteBad">Bad</button>
     </div>
 
+  </div>
+
+  <div id="endOfCommunication">
+    <p>This is the end of your story between you and the other...</p>
+    <a href="share">Find someone else</a>
   </div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>

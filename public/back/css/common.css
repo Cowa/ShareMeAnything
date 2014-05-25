@@ -1,10 +1,17 @@
+#endOfCommunication,
 #cameraShareBox,
+#currentHistory,
 #imageShareBox,
 #drawShareBox,
+#imageToShare,
 #urlShareBox,
 #voteBox,
 #waiting,
-#inTouch,
-#imageToShare {
+#inTouch {
 	display: none;
+}
+
+#lastShare img {
+	max-width: 650px;
+	max-height: 350px;
 }

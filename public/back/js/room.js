@@ -26,6 +26,7 @@ socket.on('People, this photo was sent for you', function(photo) {
 
   viewSharedImage(photo);
   viewVoteBox();
+
   thankYouServer();
 });
 
@@ -33,11 +34,23 @@ socket.on('People, this image was sent for you', function(image) {
 
   viewSharedImage(image);
   viewVoteBox();
+
   thankYouServer();
 });
 
 socket.on('People, your share was sent', function(share) {
   shareDone(share);
+  thankYouServer();
+});
+
+socket.on('People, your share was fun !', function() {
+  putLastShareInHistory();
+  thankYouServer();
+});
+
+socket.on('People, sorry but this is the end...', function(who) {
+  viewTheEnd(who);
+  putLastShareInHistory();
 });
 
 /***************
@@ -75,6 +88,16 @@ function viewSharedImage(image) {
 
 function viewVoteBox() {
   $('#voteBox').show();
+}
+
+function viewTheEnd(who) {
+  hideShareBoxes();
+  $('#endOfCommunication').show();
+  $('#voteBox').hide();
+}
+
+function putLastShareInHistory() {
+  $("#lastShare").children().first().appendTo("#currentHistory");
 }
 
 function isSender() {
@@ -121,7 +144,7 @@ function shareDone(share) {
 }
 
 function voteFun() {
-  console.log('Fun');
+  putLastShareInHistory()
   socket.emit('Server, the share was fun !');
 }
 
