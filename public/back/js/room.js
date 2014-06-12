@@ -126,6 +126,7 @@ function shareByDraw() {
   if (isSender()) {
     hideShareBoxes()
     $('#drawShareBox').show();
+    initDraw();
   }
 }
 

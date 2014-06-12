@@ -2,11 +2,9 @@ navigator.getUserMedia  = navigator.getUserMedia    || navigator.webkitGetUserMe
                           navigator.mozGetUserMedia || navigator.msGetUserMedia;
 
 var media       = null,
-	video       = document.querySelector('video'),
-	canvas      = document.querySelector('canvas'),
-	context     = canvas.getContext('2d'),
-	buttonPhoto = $('#takePhoto'),
-	buttonShare = $('#sharePhoto');
+    video       = document.querySelector('video'),
+    canvas      = document.querySelector('canvas'),
+    photoHolder = canvas.getContext('2d');
 
 var camConfig = {
 	video: {
@@ -19,7 +17,7 @@ var camConfig = {
 
 function takePhoto() {
 	if (media) {
-		context.drawImage(video, 0, 0);
+		photoHolder.drawImage(video, 0, 0);
 		$('#takenPhoto').attr('src', canvas.toDataURL('image/webp'));
 	}
 }
@@ -51,6 +49,8 @@ function initCamera() {
 	}
 }
 
-// Event listeners
-buttonPhoto.click(takePhoto);
-buttonShare.click(sharePhoto);
+/*********************
+ ** EVENT LISTENERS **
+ *********************/
+$('#takePhoto').click(takePhoto);
+$('#sharePhoto').click(sharePhoto);

@@ -89,6 +89,7 @@ io.sockets.on('connection', function(socket) {
 		}
 	});
 
+	// People share a photo from its camera
 	socket.on('Server, here\'s a photo from my camera', function(photo) {
 
 		var room = getRoom(socket);
@@ -96,11 +97,20 @@ io.sockets.on('connection', function(socket) {
 		shareDone(socket, photo);
 	});
 
+	// People share an uploaded image
 	socket.on('Server, here\'s an image I uploaded', function(image) {
 
 		var room = getRoom(socket);
 		socket.broadcast.to(room).emit('People, this image was sent for you', image);
 		shareDone(socket, image);
+	});
+
+	// People share a draw
+	socket.on('Server, here\'s a home-made draw', function(draw) {
+
+		var room = getRoom(socket);
+		socket.broadcast.to(room).emit('People, this image was sent for you', draw);
+		shareDone(socket, draw);
 	});
 
 	// People receiver say 'Fun' to the share (switch role)
