@@ -52,6 +52,7 @@ function redraw() {
 
 function shareDraw() {
 	socket.emit('Server, here\'s a home-made draw', whitePaper.canvas.toDataURL("image/png"));
+	fullClearDraw();
 }
 
 /*********************
