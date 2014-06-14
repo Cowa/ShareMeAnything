@@ -22,14 +22,6 @@ socket.on('People, this is your role', function(role) {
   thankYouServer();
 });
 
-socket.on('People, this photo was sent for you', function(photo) {
-
-  viewSharedImage(photo);
-  viewVoteBox();
-
-  thankYouServer();
-});
-
 socket.on('People, this image was sent for you', function(image) {
 
   viewSharedImage(image);
@@ -38,14 +30,26 @@ socket.on('People, this image was sent for you', function(image) {
   thankYouServer();
 });
 
-socket.on('People, your share was sent', function(share) {
-  shareDone(share);
+socket.on('People, this video was sent for you', function(video, type) {
+
+  shareDone(video, type);
+  viewVoteBox();
+
+  thankYouServer();
+});
+
+socket.on('People, your share was sent', function(share, type) {
+  shareDone(share, type);
   thankYouServer();
 });
 
 socket.on('People, your share was fun !', function() {
   putLastShareInHistory();
   thankYouServer();
+});
+
+socket.on('People, sorry but your share seems invalid', function() {
+  badUrl();
 });
 
 socket.on('People, sorry but this is the end...', function(who) {
@@ -84,6 +88,22 @@ function viewRole(role) {
 
 function viewSharedImage(image) {
   $('#lastShare').append('<img src="' + image + '"/>');
+}
+
+function viewSharedYoutube(video) {
+  var html = '<iframe id="ytplayer" type="text/html" width="640" height="360" src="https://www.youtube.com/embed/'
+              + getYoutubeId(video) +
+              '" frameborder="0" allowfullscreen>';
+
+  $('#lastShare').append(html);
+}
+
+function viewSharedVideo(video) {
+  var html = '<iframe src="//player.vimeo.com/video/'
+              + getVimeoId(video) +
+              '" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
+
+  $('#lastShare').append(html);
 }
 
 function viewVoteBox() {
@@ -138,10 +158,17 @@ function shareByURL() {
   }
 }
 
-function shareDone(share) {
+function shareDone(share, type) {
   hideShareBoxes();
   $('#choiceOfShare').hide();
-  viewSharedImage(share);
+
+  if (type == 'image') {
+    viewSharedImage(share);
+  } else if (type == 'youtube') {
+    viewSharedYoutube(share);
+  } else if (type == 'vimeo') {
+    viewSharedVideo(share);
+  }
 }
 
 function voteFun() {
