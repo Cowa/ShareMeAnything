@@ -75,13 +75,13 @@ io.sockets.on('connection', function(socket) {
 		if(isSender(socket)) {
 
 			if (isImage(url)) {
-				send_image(socket, url);
+				sendImage(socket, url);
 
 			} else if (isYoutube(url)) {
-				send_video(socket, url, 'youtube');
+				sendVideo(socket, url, 'youtube');
 
 			} else if (isVimeo(url)) {
-				send_video(socket, url, 'vimeo');
+				sendVideo(socket, url, 'vimeo');
 
 			} else {
 				socket.emit('People, sorry but your share seems invalid');
@@ -91,26 +91,17 @@ io.sockets.on('connection', function(socket) {
 
 	// People share a photo from its camera
 	socket.on('Server, here\'s a photo from my camera', function(photo) {
-
-		var room = getRoom(socket);
-		socket.broadcast.to(room).emit('People, this photo was sent for you', photo);
-		shareDone(socket, photo);
+		sendImage(socket, photo);
 	});
 
 	// People share an uploaded image
 	socket.on('Server, here\'s an image I uploaded', function(image) {
-
-		var room = getRoom(socket);
-		socket.broadcast.to(room).emit('People, this image was sent for you', image);
-		shareDone(socket, image);
+		sendImage(socket, image);
 	});
 
 	// People share a draw
 	socket.on('Server, here\'s a home-made draw', function(draw) {
-
-		var room = getRoom(socket);
-		socket.broadcast.to(room).emit('People, this image was sent for you', draw);
-		shareDone(socket, draw);
+		sendImage(socket, draw);
 	});
 
 	// People receiver say 'Fun' to the share (switch role)
@@ -308,20 +299,20 @@ function isVimeo(url) {
 	return (url.match(/http:\/\/(www\.)?vimeo.com\/(\d+)($|\/)/) != null);
 }
 
-function send_video(socket, video, type) {
+function sendVideo(socket, video, type) {
 
-	var room  = getRoom(socket);
-	socket.broadcast.to(room).emit('receive_video', video, type);
-	socket.emit('share_done', video, type);
+	var room = getRoom(socket);
+	socket.broadcast.to(room).emit('People, this video was sent for you', video, type);
+	shareDone(socket, video, type);
 }
 
-function send_image(socket, image) {
+function sendImage(socket, image) {
 
-	var room  = getRoom(socket);
-	socket.broadcast.to(room).emit('receive_image', image);
-	socket.emit('share_done', image, 'img');
+	var room = getRoom(socket);
+	socket.broadcast.to(room).emit('People, this image was sent for you', image);
+	shareDone(socket, image, 'image');
 }
 
-function shareDone(socket, share) {
-	socket.emit('People, your share was sent', share);	
+function shareDone(socket, share, type) {
+	socket.emit('People, your share was sent', share, type);	
 }
