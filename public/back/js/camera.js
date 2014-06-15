@@ -7,35 +7,19 @@ var media       = null,
     photoHolder = canvas.getContext('2d');
 
 var camConfig = {
-	video: {
-		mandatory: {
-			maxWidth: 320,
-			maxHeight: 360
-		}
-	}
-};
+	'video': true
+	};
 
 function takePhoto() {
 	if (media) {
 		photoHolder.drawImage(video, 0, 0);
-		$('#takenPhoto').attr('src', canvas.toDataURL('image/webp'));
 	}
 }
 
 function sharePhoto() {
-
-	var photo = $('#takenPhoto').attr('src');
-
-	if (photo != null) {
-		socket.emit('Server, here\'s a photo from my camera', photo);
-	} else {
-		console.log('No photo taken.');
-	}
+	var photo = canvas.toDataURL('image/webp');
+	socket.emit('Server, here\'s a photo from my camera', photo);
 }
-
-var errorCallback = function() {
-	console.log('Refused to access camera.');
-};
 
 function initCamera() {
 
@@ -43,7 +27,9 @@ function initCamera() {
 		navigator.getUserMedia(camConfig, function(stream) {
 			video.src = window.URL.createObjectURL(stream);
 			media = stream;
-		}, errorCallback);
+		}, function() {
+			console.log('Refused to access camera.');
+		});
 	} else {
 		video.src = 'none';
 	}

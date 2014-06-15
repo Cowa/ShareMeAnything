@@ -15,3 +15,8 @@
 	max-width: 650px;
 	max-height: 480px;
 }
+
+#camera, #takenPhoto {
+	width: 380px;
+	height: 280px;
+}
