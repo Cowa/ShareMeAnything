@@ -12,7 +12,7 @@ var camConfig = {
 
 function takePhoto() {
 	if (media) {
-		photoHolder.drawImage(video, 0, 0);
+		photoHolder.drawImage(video, 0, 0, 380, 280);
 	}
 }
 
