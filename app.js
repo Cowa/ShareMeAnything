@@ -123,7 +123,6 @@ io.sockets.on('connection', function(socket) {
 		roomate.leave(room);
 		updateNumberOfPeopleInRooms();
 
-		// end of stream, 1 for the people who clicked 'bad', 0 for the other
 		socket.emit('People, sorry but this is the end...', 'You didn\'t like the share');
 		roomate.emit('People, sorry but this is the end...', 'Your share was bad');
 	});
@@ -144,7 +143,7 @@ function updateNumberOfPeopleInRooms() {
 function isSender(socket) {
 
 	var room = getRoom(socket),
-		rtrn = false;
+	    rtrn = false;
 
 	for(var cl in io.sockets.clients(room)) {
 		io.sockets.clients(room)[cl].get('role', function(err, role) {
@@ -163,7 +162,7 @@ function joinRoom(socket) {
 	    room  = '';
 	    role  = '';
 
-	// Join an existing room (with a people already)
+	// Join an existing room (with a people already in)
 	for (var key in io.sockets.manager.rooms) {
 		if (key != "/lobby" && key != "") {
 			if (io.sockets.clients(key.substring(1)).length < 2) {
@@ -284,12 +283,12 @@ function getRoomate(socket, room) {
 	return roomate;
 }
 
-// Check if the given url is an image
+// Check if the url is an image
 function isImage(url) {
 	return (url.match(/\.(jpeg|jpg|gif|png)$/) != null);
 }
 
-// Check if url is a YouTube video
+// Check if the url is a YouTube video
 function isYoutube(url) {
 	return (url.match(/watch\?v=([a-zA-Z0-9\-_]+)/) != null);
 }
