@@ -8,7 +8,7 @@ Based on my [prototype](https://github.com/Cowa/SMA-Prototype).
 Concept
 -------
 
-:koala:
+![concept](readme/concept.png)
 
 Progress
 --------
