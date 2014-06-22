@@ -1,25 +1,41 @@
 /************
  ** CONFIG **
  ************/
-var express = require('express'),
-    http    = require('http'),
-    sio     = require('socket.io');
+var express  = require('express'),
+    http     = require('http'),
+    sio      = require('socket.io');
 
-var app     = express(),
-    server  = http.createServer(app),
-    io      = sio.listen(server),
-    port    = 8080;
+var app      = express(),
+    server   = http.createServer(app),
+    io       = sio.listen(server),
+    port     = 8080;
+
+// Keep compatibility with back UI
+var backMode = false;
 
 /*****************
  ** GET HANDLER **
  *****************/
 
-app.use('/css', express.static(__dirname + '/public/back/css'))
-.use('/js', express.static(__dirname + '/public/back/js'))
-.use('/img', express.static(__dirname + '/public/back/img'))
+var indexPage = '/public/index.html',
+    cssDir    = '/public/css',
+    jsDir     = '/public/js',
+    imgDir    = '/public/img';
+
+if (backMode) {
+	indexPage = '/public/back/index.html';
+	cssDir    = '/public/back/css',
+	jsDir     = '/public/back/js',
+	imgDir    = '/public/back/img';
+}
+
+app.use('/css', express.static(__dirname + cssDir))
+.use('/js', express.static(__dirname + jsDir))
+.use('/img', express.static(__dirname + imgDir))
+.use('/template', express.static(__dirname + '/public/template'))
 
 .get('/', function(req, res) {
-	res.sendfile(__dirname + '/public/back/index.html');
+	res.sendfile(__dirname + indexPage);
 })
 .get('/share', function(req, res) {
 	res.sendfile(__dirname + '/public/back/share.html');
