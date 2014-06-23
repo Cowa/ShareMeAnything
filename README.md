@@ -21,6 +21,11 @@ To test everything quickly, I made a kind of *back-front-end*. It's ugly BUT fun
 
 If you run **ShareMeAnything** now, this *back-front* will be used (even ugly, it's fun, yeah!).
 
+Powered by
+----------
+
+Node.js, Socket.IO, AngularJS & Semantic UI.
+
 Run it
 ------
 
