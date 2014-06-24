@@ -11,7 +11,7 @@ var app      = express(),
     port     = 8080;
 
 // Keep compatibility with back UI
-var backMode = false;
+var backMode = true;
 
 /*****************
  ** GET HANDLER **
