@@ -1,25 +1,41 @@
 /************
  ** CONFIG **
  ************/
-var express = require('express'),
-    http    = require('http'),
-    sio     = require('socket.io');
+var express  = require('express'),
+    http     = require('http'),
+    sio      = require('socket.io');
 
-var app     = express(),
-    server  = http.createServer(app),
-    io      = sio.listen(server),
-    port    = 8080;
+var app      = express(),
+    server   = http.createServer(app),
+    io       = sio.listen(server),
+    port     = 8080;
+
+// Keep compatibility with back UI
+var backMode = true;
 
 /*****************
  ** GET HANDLER **
  *****************/
 
-app.use('/css', express.static(__dirname + '/public/back/css'))
-.use('/js', express.static(__dirname + '/public/back/js'))
-.use('/img', express.static(__dirname + '/public/back/img'))
+var indexPage = '/public/index.html',
+    cssDir    = '/public/css',
+    jsDir     = '/public/js',
+    imgDir    = '/public/img';
+
+if (backMode) {
+	indexPage = '/public/back/index.html';
+	cssDir    = '/public/back/css',
+	jsDir     = '/public/back/js',
+	imgDir    = '/public/back/img';
+}
+
+app.use('/css', express.static(__dirname + cssDir))
+.use('/js', express.static(__dirname + jsDir))
+.use('/img', express.static(__dirname + imgDir))
+.use('/template', express.static(__dirname + '/public/template'))
 
 .get('/', function(req, res) {
-	res.sendfile(__dirname + '/public/back/index.html');
+	res.sendfile(__dirname + indexPage);
 })
 .get('/share', function(req, res) {
 	res.sendfile(__dirname + '/public/back/share.html');
@@ -45,8 +61,6 @@ io.sockets.on('connection', function(socket) {
 
 			updateNumberOfPeopleInRooms();
 			updateRoomState(room);
-
-			socket.broadcast.to(room).emit('clear_room');
 		}
 	});
 
@@ -63,10 +77,12 @@ io.sockets.on('connection', function(socket) {
 	// People want to get into the lobby
 	socket.on('Server, please add me to lobby', function() {
 
-		if (!wasInRoom(socket)) {
-			socket.join('lobby');
-			socket.emit('People, I updated the number of people in rooms', numberOfPeopleInRooms());
+		if (wasInRoom(socket)) {
+			var room = getRoom(socket);
+			socket.leave(room);
 		}
+		socket.join('lobby');
+		socket.emit('People, I updated the number of people in rooms', numberOfPeopleInRooms());
 	});
 
 	// People sender send something from URL
@@ -164,7 +180,7 @@ function joinRoom(socket) {
 
 	// Join an existing room (with a people already in)
 	for (var key in io.sockets.manager.rooms) {
-		if (key != "/lobby" && key != "") {
+		if (key != '/lobby' && key != '') {
 			if (io.sockets.clients(key.substring(1)).length < 2) {
 				found = true;
 				room = key.substring(1);
@@ -202,7 +218,7 @@ function numberOfPeopleInRooms() {
 	var n = 0;
 
 	for (var key in io.sockets.manager.rooms) {
-		if (key != "/lobby" && key != "")
+		if (key != '/lobby' && key != '')
 			n += io.sockets.clients(key.substring(1)).length;
 	}
 
@@ -237,7 +253,7 @@ function wasInRoom(socket) {
 	var inRoom = false;
 
 	for(var key in io.sockets.manager.roomClients[socket.id]) {
-		if (key != "/lobby" && key != "")
+		if (key != '/lobby' && key != '')
 			inRoom = true;
 	}
 
@@ -247,10 +263,10 @@ function wasInRoom(socket) {
 // Return the people's room name
 function getRoom(socket) {
 
-	var room = "room 237";
+	var room = 'room 237';
 
 	for(var key in io.sockets.manager.roomClients[socket.id]) {
-		if (key != "/lobby" && key != "")
+		if (key != '/lobby' && key != '')
 			room = key.substring(1);
 	}
 
