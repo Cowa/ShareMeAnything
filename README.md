@@ -24,7 +24,7 @@ If you run **ShareMeAnything** now, this *back-front* will be used (even ugly, i
 Powered by
 ----------
 
-Node.js, Socket.IO, AngularJS & Semantic UI.
+Node.js, Express, Socket.IO, AngularJS, AngularUI Router & Semantic UI.
 
 Run it
 ------
