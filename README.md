@@ -19,7 +19,7 @@ The side server is fully functional at this time (it will need improvements late
 The remaining work, before the first release, is the front-end (responsive, cross-devices).
 To test everything quickly, I made a kind of *back-front-end*. It's ugly BUT functional.
 
-If you run **ShareMeAnything** now, this *back-front* will be used (even ugly, it's fun, yeah!).
+If you want to have a look on **ShareMeAnything**, use this *back-front* by setting ```backMode``` to ```true``` (in app.js).
 
 Powered by
 ----------
