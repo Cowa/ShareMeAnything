@@ -11,7 +11,7 @@ var app      = express(),
     port     = 8080;
 
 // Keep compatibility with back UI
-var backMode = true;
+var backMode = false;
 
 /*****************
  ** GET HANDLER **
@@ -32,7 +32,7 @@ if (backMode) {
 app.use('/css', express.static(__dirname + cssDir))
 .use('/js', express.static(__dirname + jsDir))
 .use('/img', express.static(__dirname + imgDir))
-.use('/template', express.static(__dirname + '/public/template'))
+.use('/partial', express.static(__dirname + '/public/partial'))
 
 .get('/', function(req, res) {
 	res.sendfile(__dirname + indexPage);

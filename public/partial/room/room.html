@@ -1,0 +1,16 @@
+<div class="ui one column grid">
+	<div class="column" style="text-align: center;">
+		<div ng-show="sender">
+			<p>You are the sender</p>
+			<a ui-sref="room.camera">Camera</a>
+			<a ui-sref="room.image">Image</a>
+			<a ui-sref="room.draw">Draw</a>
+			<a ui-sref="room.url">URL</a>
+
+			<div ui-view></div>
+		</div>
+		<div ng-show="receiver">
+			<p>You are the receiver</p>
+		</div>
+	</div>
+</div>

@@ -5,14 +5,35 @@ sma.config(['$stateProvider', '$urlRouterProvider',
 	function($stateProvider, $urlRouterProvider) {
 		$stateProvider
 		.state('lobby', {
-			url: "/",
-			templateUrl: "template/lobby.html",
-			controller : "LobbyController"
+			url: '/',
+			templateUrl: 'partial/lobby.html',
+			controller : 'LobbyController'
+		})
+		.state('waiting', {
+			url: '/waiting',
+			templateUrl: 'partial/waiting.html',
+			controller : 'WaitingController'
 		})
 		.state('room', {
-			url: "/room",
-			templateUrl: "template/room.html",
-			controller : "RoomController"
+			url: '/room',
+			templateUrl: 'partial/room/room.html',
+			controller : 'RoomController'
+		})
+		.state('room.camera', {
+			url: '/camera',
+			templateUrl: 'partial/room/camera.html'
+		})
+		.state('room.image', {
+			url: '/image',
+			templateUrl: 'partial/room/image.html'
+		})
+		.state('room.draw', {
+			url: '/draw',
+			templateUrl: 'partial/room/draw.html'
+		})
+		.state('room.url', {
+			url: '/url',
+			templateUrl: 'partial/room/url.html'
 		});
 		$urlRouterProvider.otherwise("/");
 	}]
