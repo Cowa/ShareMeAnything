@@ -21,7 +21,9 @@ sma.controller('WaitingController', function($rootScope, $state, socket) {
 	socket.on('People, this is your role', function(role) {
 		if (role == 'sender') {
 			$rootScope.sender   = true;
+			$rootScope.receiver = false;
 		} else if (role == 'receiver') {
+			$rootScope.sender   = false;
 			$rootScope.receiver = true;
 		}
 	});
@@ -46,4 +48,30 @@ sma.controller('RoomController', function($rootScope, $state, socket) {
 			$rootScope.receiver = true;
 		}
 	});
+});
+
+// Camera controller
+sma.controller('CameraController', function($rootScope, $state) {
+	$rootScope.setCamera = function() {
+		media       = null,
+		video       = document.querySelector('video'),
+		canvas      = $('#takenPhoto')[0],
+		photoHolder = canvas.getContext('2d');
+
+		var camConfig = {
+			'video': true
+		};
+
+		if (navigator.getUserMedia) {
+			navigator.getUserMedia(camConfig, function(stream) {
+				video.src = window.URL.createObjectURL(stream);
+				media = stream;
+			}, function() {
+				console.log('Refused to access camera.');
+			});
+		} else {
+			console.log('No camera support.');
+			video.src = 'none';
+		}
+	};
 });

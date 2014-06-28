@@ -21,7 +21,8 @@ sma.config(['$stateProvider', '$urlRouterProvider',
 		})
 		.state('room.camera', {
 			url: '/camera',
-			templateUrl: 'partial/room/camera.html'
+			templateUrl: 'partial/room/camera.html',
+			controller : 'CameraController'
 		})
 		.state('room.image', {
 			url: '/image',
@@ -35,7 +36,7 @@ sma.config(['$stateProvider', '$urlRouterProvider',
 			url: '/url',
 			templateUrl: 'partial/room/url.html'
 		});
-		$urlRouterProvider.otherwise("/");
+		$urlRouterProvider.otherwise('/');
 	}]
 );
 

@@ -1,1 +1,5 @@
-<h2>Camera mode \o/</h2>
+<video  ng-hide="snap" id="camera" autoplay ng-init="setCamera()"></video>
+<canvas ng-show="snap" id="takenPhoto"></canvas>
+<button ng-hide="snap" ng-click="snap = true" >Take a photo</button>
+<button ng-show="snap" ng-click="snap = false">Take another</button>
+<button>Share it</button>
