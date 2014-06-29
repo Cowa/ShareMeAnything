@@ -1,4 +1,4 @@
-var sma = angular.module('sma', ['ui.router']);
+var sma = angular.module('sma', ['ui.router', 'webcam']);
 
 // Routing
 sma.config(['$stateProvider', '$urlRouterProvider',

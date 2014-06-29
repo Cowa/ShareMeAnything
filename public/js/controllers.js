@@ -51,27 +51,51 @@ sma.controller('RoomController', function($rootScope, $state, socket) {
 });
 
 // Camera controller
-sma.controller('CameraController', function($rootScope, $state) {
-	$rootScope.setCamera = function() {
-		media       = null,
-		video       = document.querySelector('video'),
-		canvas      = $('#takenPhoto')[0],
-		photoHolder = canvas.getContext('2d');
+sma.controller('CameraController', function($rootScope, $state, socket) {
+	$rootScope.patOpts = {x: 0, y: 0, w: 25, h: 25};
+	$rootScope.snap    = false;
 
-		var camConfig = {
-			'video': true
-		};
+	$rootScope.onError = function (err) {
 
-		if (navigator.getUserMedia) {
-			navigator.getUserMedia(camConfig, function(stream) {
-				video.src = window.URL.createObjectURL(stream);
-				media = stream;
-			}, function() {
-				console.log('Refused to access camera.');
-			});
-		} else {
-			console.log('No camera support.');
-			video.src = 'none';
+	};
+
+	$rootScope.onSuccess = function(videoElem) {
+		video = videoElem;
+		$rootScope.$apply(function() {
+			$rootScope.patOpts.w = video.width;
+			$rootScope.patOpts.h = video.height;
+		});
+	};
+
+	$rootScope.onStream = function (stream, videoElem) {
+
+	};
+
+	$rootScope.takePhoto = function() {
+
+		$rootScope.snap = true;
+		if (video) {
+			var takenPhoto = $('#takenPhoto')[0];
+			if (!takenPhoto) return;
+
+			socket.emit('Taking photo');
+			takenPhoto.width = video.width;
+			takenPhoto.height = video.height;
+			var ctx = takenPhoto.getContext('2d');
+
+			var idata = getVideoData($rootScope.patOpts.x, $rootScope.patOpts.y, $rootScope.patOpts.w, $rootScope.patOpts.h);
+			ctx.putImageData(idata, 0, 0);
+
+			patData = idata;
 		}
+	};
+
+	var getVideoData = function getVideoData(x, y, w, h) {
+		var hiddenCanvas = document.createElement('canvas');
+		hiddenCanvas.width = video.width;
+		hiddenCanvas.height = video.height;
+		var ctx = hiddenCanvas.getContext('2d');
+		ctx.drawImage(video, 0, 0, video.width, video.height);
+		return ctx.getImageData(x, y, w, h);
 	};
 });

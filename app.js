@@ -64,6 +64,10 @@ io.sockets.on('connection', function(socket) {
 		}
 	});
 
+	socket.on('Taking photo', function() {
+		console.log('Taking photo');
+	});
+
 	// People want to share
 	socket.on('Server, please I want to share', function() {
 
