@@ -35,6 +35,10 @@ sma.config(['$stateProvider', '$urlRouterProvider',
 		.state('room.url', {
 			url: '/url',
 			templateUrl: 'partial/room/url.html'
+		})
+		.state('end', {
+			url: '/end',
+			templateUrl: 'partial/end.html'
 		});
 		$urlRouterProvider.otherwise('/');
 	}]

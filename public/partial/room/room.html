@@ -1,16 +1,41 @@
 <div class="ui one column grid">
 	<div class="column" style="text-align: center;">
-		<div ng-show="sender">
-			<p>You are the sender</p>
-			<a ui-sref="room.camera">Camera</a>
-			<a ui-sref="room.image">Image</a>
-			<a ui-sref="room.draw">Draw</a>
-			<a ui-sref="room.url">URL</a>
 
-			<div ui-view></div>
+		<!-- SENDER -->
+		<div ng-show="sender">
+
+			<div ng-hide="shared">
+				<p>Please, share anything</p>
+				<a ui-sref="room.camera">Camera</a>
+				<a ui-sref="room.image">Image</a>
+				<a ui-sref="room.draw">Draw</a>
+				<a ui-sref="room.url">URL</a>
+
+				<div ui-view></div>
+			</div>
+
+			<div ng-show="shared">
+				<p>Please, wait the vote</p>
+				<div id="sentShare"></div>
+			</div>
 		</div>
+
+		<!-- RECEIVER -->
 		<div ng-show="receiver">
-			<p>You are the receiver</p>
+
+			<div ng-show="wait">
+				<p>Please, wait the share</p>
+			</div>
+
+			<div ng-hide="wait">
+				<p>You got something ! How is it ?</p>
+				<div id="receivedShare"></div>
+				<button ng-click="voteFun()">Fun</button>
+				<button ng-click="voteBad()">Bad</button>
+			</div>
+
 		</div>
 	</div>
+
+	<div id="history" style="display: none;"></div>
 </div>
