@@ -55,11 +55,15 @@ sma.controller('RoomController', function($rootScope, $state, socket) {
 			$rootScope.sender   = false;
 			$rootScope.receiver = true;
 		}
+
+		putLastShareInHistory();
 	});
 
 	socket.on('People, this image was sent for you', function(image) {
+		if ($rootScope.wait) {
+			$('#receivedShare').append('<img src="' + image + '"/>');
+		}
 		$rootScope.wait = false;
-		$('#receivedShare').append('<img src="' + image + '"/>');
 	})
 
 	socket.on('People, sorry but this is the end...', function(msg) {
@@ -75,8 +79,8 @@ sma.controller('RoomController', function($rootScope, $state, socket) {
 	};
 
 	var putLastShareInHistory = function() {
-		$("#sentShare").children().first().appendTo("#history");
-		$("#receivedShare").children().first().appendTo("#history");
+		$("#sentShare").children().appendTo("#history");
+		$("#receivedShare").children().appendTo("#history");
 	};
 });
 
