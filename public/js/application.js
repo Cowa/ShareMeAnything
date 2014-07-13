@@ -1,4 +1,4 @@
-var sma = angular.module('sma', ['ui.router']);
+var sma = angular.module('sma', ['ui.router', 'webcam']);
 
 // Routing
 sma.config(['$stateProvider', '$urlRouterProvider',
@@ -21,7 +21,8 @@ sma.config(['$stateProvider', '$urlRouterProvider',
 		})
 		.state('room.camera', {
 			url: '/camera',
-			templateUrl: 'partial/room/camera.html'
+			templateUrl: 'partial/room/camera.html',
+			controller : 'CameraController'
 		})
 		.state('room.image', {
 			url: '/image',
@@ -34,8 +35,12 @@ sma.config(['$stateProvider', '$urlRouterProvider',
 		.state('room.url', {
 			url: '/url',
 			templateUrl: 'partial/room/url.html'
+		})
+		.state('end', {
+			url: '/end',
+			templateUrl: 'partial/end.html'
 		});
-		$urlRouterProvider.otherwise("/");
+		$urlRouterProvider.otherwise('/');
 	}]
 );
 
