@@ -30,8 +30,7 @@ sma.controller('WaitingController', function($rootScope, $state, socket) {
 });
 
 // Room controller
-sma.controller('RoomController', function($rootScope, $state, socket) {
-
+sma.controller('RoomController', function($rootScope, $state, socket) 
 	$rootScope.shared  = false;
 	$rootScope.wait    = true;
 
@@ -113,7 +112,7 @@ sma.controller('CameraController', function($scope, $rootScope, $state, socket) 
 			var ctx = takenPhoto.getContext('2d');
 
 			var idata = getVideoData($scope.patOpts.x, $scope.patOpts.y,
-				                     $scope.patOpts.w, $scope.patOpts.h);
+                                     $scope.patOpts.w, $scope.patOpts.h);
 
 			ctx.putImageData(idata, 0, 0);
 		}
