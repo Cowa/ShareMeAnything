@@ -34,7 +34,6 @@ sma.controller('RoomController', function($rootScope, $state, socket) {
 
 	$rootScope.shared  = false;
 	$rootScope.wait    = true;
-	$rootScope.history = false;
 
 	socket.emit('Server, please I want to share');
 
