@@ -1,1 +1,3 @@
-<h2>Image mode \o/</h2>
+<input type="file" accept="image/*" ng-file-select="onFileSelect($files)">
+<div ng-file-drop="onFileSelect($files)" ng-file-drag-over-class="" ng-show="dropSupported">Drop image here</div>
+<div ng-file-drop-available="dropSupported=true" ng-show="!dropSupported">Drop file not available :(</div>
