@@ -1,4 +1,4 @@
-var sma = angular.module('sma', ['ui.router', 'webcam']);
+var sma = angular.module('sma', ['ui.router', 'webcam', 'angularFileUpload']);
 
 // Routing
 sma.config(['$stateProvider', '$urlRouterProvider',
@@ -26,7 +26,8 @@ sma.config(['$stateProvider', '$urlRouterProvider',
 		})
 		.state('room.image', {
 			url: '/image',
-			templateUrl: 'partial/room/image.html'
+			templateUrl: 'partial/room/image.html',
+			controller : 'ImageController'
 		})
 		.state('room.draw', {
 			url: '/draw',
