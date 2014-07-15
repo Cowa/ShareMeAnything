@@ -161,9 +161,12 @@ sma.controller('ImageController', function($scope, $rootScope, $state, $upload, 
 		var reader = new FileReader();
 
 		reader.onload = function(evt) {
-			image = evt.target.result;
+			var image = evt.target.result;
 			socket.emit('Server, here\'s an image I uploaded', image);
 		};
+		reader.onloadend = (function() {
+		});
+
 		reader.readAsDataURL(data);
 	};
 });
