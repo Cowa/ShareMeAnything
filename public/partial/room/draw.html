@@ -1,1 +1,12 @@
-<h2>Draw mode \o/</h2>
+<canvas
+	style="border: 5px solid;"
+	width="450"
+	height="350"
+	stroke-color='color'
+	stroke-width='width'
+	ng-model='drawToShare'
+	draw>
+</canvas>
+<br>
+<button ng-click="shareDraw()">Share it</button>
+<button ng-click="drawToShare = ''">Clear</button>

@@ -100,7 +100,7 @@ sma.controller('RoomController', function($rootScope, $state, socket) {
 /**
  * Image controller
  */
-sma.controller('CameraController', function($scope, $rootScope, $state, socket) {
+sma.controller('CameraController', function($scope, socket) {
 	$scope.patOpts = {x: 0, y: 0, w: 25, h: 25};
 	$scope.snap    = false;
 
@@ -155,7 +155,7 @@ sma.controller('CameraController', function($scope, $rootScope, $state, socket) 
 /**
  * Image controller
  */
-sma.controller('ImageController', function($scope, $rootScope, $state, $upload, socket) {
+sma.controller('ImageController', function($scope, socket) {
 	$scope.onFileSelect = function($files) {
 		var data   = $files[0];
 		var reader = new FileReader();
@@ -168,5 +168,18 @@ sma.controller('ImageController', function($scope, $rootScope, $state, $upload, 
 		});
 
 		reader.readAsDataURL(data);
+	};
+});
+
+/**
+ * Draw controller
+ */
+sma.controller('DrawController', function($scope, socket) {
+	$scope.color = '#5eaa63';
+
+	$scope.shareDraw = function() {
+		if ($scope.drawToShare) {
+			socket.emit('Server, here\'s a home-made draw', $scope.drawToShare);
+		}
 	};
 });
