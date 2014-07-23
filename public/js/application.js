@@ -1,44 +1,45 @@
-var sma = angular.module('sma', ['ui.router', 'webcam', 'angularFileUpload']);
+var sma = angular.module('sma', ['ui.router', 'webcam', 'angularFileUpload', 'common.draw']);
 
 // Routing
 sma.config(['$stateProvider', '$urlRouterProvider',
 	function($stateProvider, $urlRouterProvider) {
 		$stateProvider
 		.state('lobby', {
-			url: '/',
+			url        : '/',
 			templateUrl: 'partial/lobby.html',
 			controller : 'LobbyController'
 		})
 		.state('waiting', {
-			url: '/waiting',
+			url        : '/waiting',
 			templateUrl: 'partial/waiting.html',
 			controller : 'WaitingController'
 		})
 		.state('room', {
-			url: '/room',
+			url        : '/room',
 			templateUrl: 'partial/room/room.html',
 			controller : 'RoomController'
 		})
 		.state('room.camera', {
-			url: '/camera',
+			url        : '/camera',
 			templateUrl: 'partial/room/camera.html',
 			controller : 'CameraController'
 		})
 		.state('room.image', {
-			url: '/image',
+			url        : '/image',
 			templateUrl: 'partial/room/image.html',
 			controller : 'ImageController'
 		})
 		.state('room.draw', {
-			url: '/draw',
-			templateUrl: 'partial/room/draw.html'
+			url        : '/draw',
+			templateUrl: 'partial/room/draw.html',
+			controller : 'DrawController'
 		})
 		.state('room.url', {
-			url: '/url',
-			templateUrl: 'partial/room/url.html'
+			url        : '/url',
+			templateUrl: 'partial/room/url.html',
 		})
 		.state('end', {
-			url: '/end',
+			url        : '/end',
 			templateUrl: 'partial/end.html'
 		});
 		$urlRouterProvider.otherwise('/');
