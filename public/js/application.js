@@ -1,4 +1,4 @@
-var sma = angular.module('sma', ['ui.router', 'webcam', 'angularFileUpload', 'common.draw']);
+var sma = angular.module('sma', ['ui.router', 'webcam', 'angularFileUpload', 'common.draw', 'ngStorage']);
 
 // Routing
 sma.config(['$stateProvider', '$urlRouterProvider',

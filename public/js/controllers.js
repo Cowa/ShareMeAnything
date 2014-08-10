@@ -1,7 +1,12 @@
 /**
  * Lobby controller
  */
-sma.controller('LobbyController', function($rootScope, $state, socket) {
+sma.controller('LobbyController', function($rootScope, $state, $localStorage, socket) {
+	$rootScope.$storage = $localStorage.$default({
+		history: [],
+		numberOfConversation: 0
+	});
+
 	socket.emit('Server, please add me to lobby');
 	socket.on('People, I updated the number of people in rooms', function(number) {
 		$rootScope.numberOfPeopleInRooms = number;
@@ -36,9 +41,11 @@ sma.controller('WaitingController', function($rootScope, $state, socket) {
 /**
  * Room controller
  */
-sma.controller('RoomController', function($rootScope, $state, socket) {
-	$rootScope.shared  = false;
-	$rootScope.wait    = true;
+sma.controller('RoomController', function($rootScope, $state, $localStorage, socket) {
+	$rootScope.$storage = $localStorage;
+	$rootScope.$storage.numberOfConversation++;
+	$rootScope.shared   = false;
+	$rootScope.wait     = true;
 
 	socket.emit('Server, please I want to share');
 
