@@ -190,3 +190,10 @@ sma.controller('DrawController', function($scope, socket) {
 		}
 	};
 });
+
+/**
+ * Url controller
+ */
+sma.controller('UrlController', function($scope, socket) {
+
+});
