@@ -195,5 +195,10 @@ sma.controller('DrawController', function($scope, socket) {
  * Url controller
  */
 sma.controller('UrlController', function($scope, socket) {
-
+	$scope.shareUrl = function() {
+		if($scope.urlToShare) {
+			socket.emit('Server, I shared something from an URL', $scope.urlToShare);
+			$scope.urlToShare = '';
+		}
+	}
 });
