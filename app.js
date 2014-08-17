@@ -183,7 +183,7 @@ function joinRoom(socket) {
 		if (key != '/lobby' && key != '') {
 			if (io.sockets.clients(key.substring(1)).length < 2) {
 				found = true;
-				room = key.substring(1);
+				room  = key.substring(1);
 
 				io.sockets.clients(room)[0].get('role', function(err, grole) {
 					if (grole == 'receiver') role = 'sender';
