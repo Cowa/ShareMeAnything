@@ -77,6 +77,17 @@ sma.controller('RoomController', function($rootScope, $state, $localStorage, soc
 		$rootScope.wait = false;
 	})
 
+	socket.on('People, this video was sent for you', function(video, type) {
+		if ($rootScope.wait) {
+			if (type == 'youtube') {
+				viewYoutubeVideo(video, false);
+			} else if (type == 'vimeo') {
+				viewVimeoVideo(video, false);
+			}
+		}
+		$rootScope.wait = false;
+	});
+
 	socket.on('People, sorry but this is the end...', function(msg) {
 		$state.transitionTo('end');
 	});
@@ -86,6 +97,10 @@ sma.controller('RoomController', function($rootScope, $state, $localStorage, soc
 			$rootScope.shared = true;
 			if (type == 'image' || type == 'photo') {	
 				$('#sentShare').append('<img src="' + share + '"/>');
+			} else if (type == 'youtube') {
+				viewYoutubeVideo(share, true);
+			} else if (type == 'vimeo') {
+				viewVimeoVideo(share, true);
 			}
 		}
 	});
@@ -102,6 +117,45 @@ sma.controller('RoomController', function($rootScope, $state, $localStorage, soc
 		$("#sentShare").children().appendTo("#history");
 		$("#receivedShare").children().appendTo("#history");
 	};
+
+	var getYoutubeId = function(url) {
+		var id = '';
+		url = url.replace(/(>|<)/gi,'').split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
+		if (url[2] !== undefined) {
+			id = url[2].split(/[^0-9a-z_-]/i);
+			id = id[0];
+		} else {
+			id = url;
+		}
+		return id;
+	}
+
+	var getVimeoId = function(url) {
+		var match = url.match(/http:\/\/(www\.)?vimeo.com\/(\d+)($|\/)/);
+		return match[2];
+	}
+
+	var viewYoutubeVideo = function(video, sender) {
+		var html = '<iframe id="ytplayer" type="text/html" width="640" height="360" src="https://www.youtube.com/embed/'
+                   + getYoutubeId(video) +
+                   '" frameborder="0" allowfullscreen>';
+		if (sender) {
+			$('#sentShare').append(html);
+		} else {
+			$('#receivedShare').append(html);
+		}
+	}
+
+	var viewVimeoVideo = function(video, sender) {
+		var html = '<iframe src="//player.vimeo.com/video/'
+                   + getVimeoId(video) +
+                   '" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
+		if (sender) {
+			$('#sentShare').append(html);
+		} else {
+			$('#receivedShare').append(html);
+		}
+	}
 });
 
 /**
@@ -189,4 +243,16 @@ sma.controller('DrawController', function($scope, socket) {
 			socket.emit('Server, here\'s a home-made draw', $scope.drawToShare);
 		}
 	};
+});
+
+/**
+ * Url controller
+ */
+sma.controller('UrlController', function($scope, socket) {
+	$scope.shareUrl = function() {
+		if($scope.urlToShare) {
+			socket.emit('Server, I shared something from an URL', $scope.urlToShare);
+			$scope.urlToShare = '';
+		}
+	}
 });
