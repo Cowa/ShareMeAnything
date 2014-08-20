@@ -10,24 +10,20 @@ var app      = express(),
     io       = sio.listen(server),
     port     = 8080;
 
-// Keep compatibility with back UI
-var backMode = false;
+// Debug mode
+var debugMode = false;
+
+if (!debugMode) {
+  io.set('log level', 1);
+}
 
 /*****************
  ** GET HANDLER **
  *****************/
-
 var indexPage = '/public/index.html',
     cssDir    = '/public/css',
     jsDir     = '/public/js',
     imgDir    = '/public/img';
-
-if (backMode) {
-	indexPage = '/public/back/index.html';
-	cssDir    = '/public/back/css',
-	jsDir     = '/public/back/js',
-	imgDir    = '/public/back/img';
-}
 
 app.use('/css', express.static(__dirname + cssDir))
 .use('/js', express.static(__dirname + jsDir))
@@ -329,5 +325,5 @@ function sendImage(socket, image) {
 }
 
 function shareDone(socket, share, type) {
-	socket.emit('People, your share was sent', share, type);	
+	socket.emit('People, your share was sent', share, type);
 }
