@@ -95,7 +95,7 @@ sma.controller('RoomController', function($rootScope, $state, $localStorage, soc
 	socket.on('People, your share was sent', function(share, type) {
 		if (!$rootScope.shared) {
 			$rootScope.shared = true;
-			if (type == 'image' || type == 'photo') {	
+			if (type == 'image' || type == 'photo') {
 				$('#sentShare').append('<img src="' + share + '"/>');
 			} else if (type == 'youtube') {
 				viewYoutubeVideo(share, true);
@@ -159,7 +159,7 @@ sma.controller('RoomController', function($rootScope, $state, $localStorage, soc
 });
 
 /**
- * Image controller
+ * Camera controller
  */
 sma.controller('CameraController', function($scope, socket) {
 	$scope.patOpts = {x: 0, y: 0, w: 25, h: 25};
