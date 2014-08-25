@@ -21,7 +21,7 @@ The remaining work, before the first release, is the front-end (responsive, cros
 Powered by
 ----------
 
-Node.js, Express, Socket.IO, AngularJS, AngularUI Router & Semantic UI.
+Node.js, Express, Socket.IO, AngularJS, AngularUI Router & Material Design.
 
 Run it
 ------
