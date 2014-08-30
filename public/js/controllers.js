@@ -256,3 +256,9 @@ sma.controller('UrlController', function($scope, socket) {
 		}
 	}
 });
+
+sma.controller('ToolbarController', function($scope, $materialSidenav) {
+	$scope.toggleMenu = function() {
+		$materialSidenav('left').toggle();
+	}
+});

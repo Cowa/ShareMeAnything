@@ -26,21 +26,18 @@ var indexPage = '/public/index.html',
     imgDir    = '/public/img';
 
 app.use('/css', express.static(__dirname + cssDir))
-.use('/js', express.static(__dirname + jsDir))
-.use('/img', express.static(__dirname + imgDir))
-.use('/partial', express.static(__dirname + '/public/partial'))
+   .use('/js', express.static(__dirname + jsDir))
+   .use('/img', express.static(__dirname + imgDir))
+   .use('/partial', express.static(__dirname + '/public/partial'))
 
-.get('/', function(req, res) {
-	res.sendfile(__dirname + indexPage);
-})
-.get('/share', function(req, res) {
-	res.sendfile(__dirname + '/public/back/share.html');
-})
+   .get('/', function(req, res) {
+      res.sendfile(__dirname + indexPage);
+   })
 
-.use(function(req, res, next) {
-	res.setHeader('Content-Type', 'text/plain');
-	res.send(404, 'Page not found');
-});
+   .use(function(req, res, next) {
+      res.setHeader('Content-Type', 'text/plain');
+      res.send(404, 'Page not found');
+   });
 
 /*********************
  ** SOCKETS HANDLER **
