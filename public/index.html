@@ -6,30 +6,29 @@
 	<link rel="stylesheet" href="css/vendors/angular-material.min.css"/>
 	<link rel="stylesheet" href="css/style.css"/>
 </head>
-<body ng-app="sma" ng-controller="ToolbarController">
+<body ng-app="sma" >
 
-	<material-toolbar class="material-theme-green material-medium header" >
+	<!-- Toolbar -->
+	<material-toolbar class="material-theme-green material-medium" ng-controller="ToolbarController">
 		<h1 class="material-toolbar-tools">
-			<a href="#" ng-click="toggleMenu()">||||</a><span>ShareMeAnything</span>
+			<material-button ng-click="toggleMenu()">||||</material-button><span>ShareMeAnything</span>
 		</h1>
 	</material-toolbar>
 
+	<!-- Sidepanel -->
 	<section layout="horizontal" layout-fill>
-		<material-sidenav class="material-sidenav-left sidepanel">
-			<div class="menu-icon">
-				<material-icon icon="img/icons/ic_menu_24px.svg"><object class="material-icon" data="img/icons/ic_menu_24px.svg"></object></material-icon>
-			</div>
+		<material-sidenav class="material-sidenav-left sidepanel" component-id="left">
 			<material-content class="material-content-padding">
-				<material-button class="material-button-colored" layout="horizontal" layout-fill>
+				<material-button layout="horizontal" layout-fill>
 					History
 				</material-button>
-				<material-button class="material-button-colored" layout="horizontal" layout-fill>
+				<material-button layout="horizontal" layout-fill>
 					Favorite
 				</material-button>
-				<material-button class="material-button-colored" layout="horizontal" layout-fill>
+				<material-button layout="horizontal" layout-fill>
 					Settings
 				</material-button>
-				<material-button class="material-button-colored" layout="horizontal" layout-fill>
+				<material-button layout="horizontal" layout-fill>
 					About
 				</material-button>
 			</material-content>
