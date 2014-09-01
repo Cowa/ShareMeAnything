@@ -256,3 +256,12 @@ sma.controller('UrlController', function($scope, socket) {
 		}
 	}
 });
+
+/**
+ * Toolbar controller
+ */
+sma.controller('ToolbarController', function($scope, $materialSidenav) {
+	$scope.toggleMenu = function() {
+		$materialSidenav('left').toggle();
+	}
+});

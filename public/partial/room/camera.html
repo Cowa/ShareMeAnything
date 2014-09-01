@@ -4,6 +4,6 @@
 </webcam>
 <canvas ng-show="snap" id="takenPhoto"></canvas>
 <br>
-<button ng-hide="snap" ng-click="takePhoto()" >Take a photo</button>
-<button ng-show="snap" ng-click="snap = false">Take another</button>
-<button ng-click="sharePhoto()">Share it</button>
+<material-button class="material-theme-yellow" ng-hide="snap" ng-click="takePhoto()" >Take a photo</material-button>
+<material-button class="material-theme-orange" ng-show="snap" ng-click="snap = false">Take another</material-button>
+<material-button class="material-theme-green" ng-click="sharePhoto()">Share it</material-button>
